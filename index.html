@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel THE</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:black;
+  color:white;
+  overflow:hidden;
+}
+
+/* FUNDO ESTRELAS */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px);
+  background-size:40px 40px, 60px 60px;
+  animation:move 20s linear infinite;
+  opacity:.6;
+}
+@keyframes move{
+  from{background-position:0 0, 0 0}
+  to{background-position:1000px 1000px, -1000px -1000px}
+}
+
+.container{
+  position:relative;
+  z-index:2;
+  max-width:420px;
+  margin:60px auto;
+  padding:20px;
+}
+
+.box{
+  background:#000;
+  border:2px solid #1aff5a;
+  box-shadow:0 0 25px #1aff5a;
+  border-radius:14px;
+  padding:18px;
+}
+
+h1{
+  text-align:center;
+  margin:0 0 15px;
+}
+
+input, select{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  background:black;
+  border:1px solid #1aff5a;
+  color:white;
+  border-radius:8px;
+}
+
+button{
+  width:100%;
+  padding:10px;
+  margin-top:15px;
+  background:#1aff5a;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.tabs{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:15px;
+}
+
+.tab{
+  flex:1;
+  margin:0 3px;
+  padding:8px;
+  background:#111;
+  border:1px solid #1aff5a;
+  color:white;
+  border-radius:6px;
+}
+
+.tab.active{
+  background:#1aff5a;
+  color:black;
+}
+
+.section{
+  display:none;
+}
+.section.active{
+  display:block;
+}
+
+.line{
+  margin:10px 0;
+}
+
+label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.range{
+  width:100%;
+}
+.small{
+  font-size:12px;
+  color:#1aff5a;
+  text-align:right;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div class="box" id="login">
+  <h1>PAINEL THE</h1>
+  <input id="keyInput" placeholder="Digite a Key">
+  <button onclick="logar()">ENTRAR</button>
+</div>
+
+<!-- PAINEL -->
+<div class="box" id="panel" style="display:none;">
+  <h1>PAINEL THE</h1>
+
+  <div class="tabs">
+    <button class="tab active" onclick="openTab(0)">Principal</button>
+    <button class="tab" onclick="openTab(1)">Bypass</button>
+    <button class="tab" onclick="openTab(2)">Aimbot</button>
+    <button class="tab" onclick="openTab(3)">Extra</button>
+  </div>
+
+  <!-- PRINCIPAL -->
+  <div class="section active">
+    <label><input type="checkbox"> Cabeça</label>
+    <label><input type="checkbox"> Pescoço</label>
+    <label><input type="checkbox"> Peito</label>
+
+    <div class="line">
+      Regular Aimbot
+      <input class="range" type="range" min="0" max="100" value="70"
+        oninput="val.innerText=this.value+'%'">
+      <div class="small" id="val">70%</div>
+    </div>
+
+    <select>
+      <option>Sensi Alta</option>
+      <option>Sensi Média</option>
+      <option>Sensi Baixa</option>
+    </select>
+
+    <div class="line">
+      Tipo de Mira:
+      <label><input type="radio" name="mira" checked> Precisa</label>
+      <label><input type="radio" name="mira"> Rápida</label>
+    </div>
+  </div>
+
+  <!-- BYPASS -->
+  <div class="section">
+    <label><input type="checkbox"> Códigos por IA</label>
+    <label><input type="checkbox"> Ativar Bypass</label>
+  </div>
+
+  <!-- AIMBOT -->
+  <div class="section">
+    <label><input type="checkbox"> Aimbot Rage</label>
+    <label><input type="checkbox"> No Recoil</label>
+    <label><input type="checkbox"> Tela Esticada</label>
+    <label><input type="checkbox"> Mira Pro</label>
+  </div>
+
+  <!-- EXTRA -->
+  <div class="section">
+    <label><input type="checkbox"> FPS Boost</label>
+    <label><input type="checkbox"> Modo Performance</label>
+    <label><input type="checkbox"> Estabilidade</label>
+  </div>
+
+</div>
+</div>
+
+<script>
+const KEY = "thepainelvip";
+
+function logar(){
+  if(document.getElementById("keyInput").value.trim() !== KEY){
+    alert("❌ Key inválida");
+    return;
+  }
+  document.getElementById("login").style.display="none";
+  document.getElementById("panel").style.display="block";
+}
+
+function openTab(i){
+  document.querySelectorAll(".tab").forEach((t,idx)=>{
+    t.classList.toggle("active", idx===i);
+  });
+  document.querySelectorAll(".section").forEach((s,idx)=>{
+    s.classList.toggle("active", idx===i);
+  });
+}
+</script>
+
+</body>
+</html>
